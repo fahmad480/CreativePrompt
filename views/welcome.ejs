@@ -1,0 +1,653 @@
+
+<!doctype html>
+
+<html
+    lang="en"
+    class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="<%= asset_url %>/assets/"
+    data-template="vertical-menu-template"
+    data-style="light">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+        <title>Home | <%= title %></title>
+
+        <meta name="description" content="" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="<%= asset_url %>/assets/img/favicon/favicon.ico" />
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
+            rel="stylesheet" />
+
+        <!-- Icons -->
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/fonts/fontawesome.css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/fonts/tabler-icons.css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/fonts/flag-icons.css" />
+
+        <!-- Core CSS -->
+
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+        <link rel="stylesheet" href="<%= asset_url %>/assets/css/demo.css" />
+
+        <!-- Vendors CSS -->
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/libs/node-waves/node-waves.css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/libs/typeahead-js/typeahead.css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/libs/swiper/swiper.css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/libs/spinkit/spinkit.css" />
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/libs/sweetalert2/sweetalert2.css" />
+
+        <!-- Page CSS -->
+        <link rel="stylesheet" href="<%= asset_url %>/assets/vendor/css/pages/app-chat.css" />
+        <style>
+            .container-horizontal-scroll {
+                display: flex;
+                overflow-x: auto; /* Use 'auto' instead of 'scroll' */
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+            }
+        
+            .container-horizontal-scroll .item {
+                flex: 0 0 auto;
+                scroll-snap-align: start;
+                max-width: 300px;
+            }
+        
+            .container-horizontal-scroll::-webkit-scrollbar {
+                height: 8px; /* Adjust the height of the scrollbar */
+            }
+        
+            .container-horizontal-scroll::-webkit-scrollbar-track {
+                background: #f1f1f1; /* Background of the scrollbar track */
+            }
+        
+            .container-horizontal-scroll::-webkit-scrollbar-thumb {
+                background: #888; /* Color of the scrollbar thumb */
+                border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+            }
+        
+            .container-horizontal-scroll::-webkit-scrollbar-thumb:hover {
+                background: #555; /* Color of the scrollbar thumb on hover */
+            }
+        </style>
+
+        <!-- Helpers -->
+        <script src="<%= asset_url %>/assets/vendor/js/helpers.js"></script>
+
+        <!--? Config:    Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.    -->
+        <script src="<%= asset_url %>/assets/js/config.js"></script>
+    </head>
+
+    <body>
+        <div class="container-fluid mt-5" id="content">
+            <div class="app-chat card overflow-hidden">
+                    <div class="row g-0" id="app-chat">
+                        <!-- Sidebar Left -->
+                        <div class="col app-chat-sidebar-left app-sidebar overflow-hidden" id="app-chat-sidebar-left">
+                            <div
+                                class="chat-sidebar-left-user sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-6 pt-12">
+                                <div class="avatar avatar-xl avatar-online chat-sidebar-avatar">
+                                    <img src="<%= asset_url %>/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+                                </div>
+                                <h5 class="mt-4 mb-0">Manusia Kadal</h5>
+                                <i
+                                    class="ti ti-x ti-lg cursor-pointer close-sidebar"
+                                    data-bs-toggle="sidebar"
+                                    data-overlay
+                                    data-target="#app-chat-sidebar-left"></i>
+                            </div>
+                            <div class="sidebar-body px-6 pb-6">
+                                <div class="d-flex mt-6">
+                                    <button
+                                        class="btn btn-primary w-100"
+                                        data-bs-toggle="sidebar"
+                                        data-overlay
+                                        data-target="#app-chat-sidebar-left">
+                                        Logout<i class="ti ti-logout ti-16px ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Sidebar Left-->
+
+                        <!-- Chat & Contacts -->
+                        <!-- <div
+                            class="col app-chat-contacts app-sidebar flex-grow-0 overflow-hidden border-end"
+                            id="app-chat-contacts">
+                            <div class="sidebar-header h-px-75 px-5 border-bottom d-flex align-items-center">
+                                <div class="d-flex align-items-center me-6 me-lg-0">
+                                    <div
+                                        class="flex-shrink-0 avatar avatar-online me-4"
+                                        data-bs-toggle="sidebar"
+                                        data-overlay="app-overlay-ex"
+                                        data-target="#app-chat-sidebar-left">
+                                        <img
+                                            class="user-avatar rounded-circle cursor-pointer"
+                                            src="<%= asset_url %>/assets/img/avatars/1.png"
+                                            alt="Avatar" />
+                                    </div>
+                                    <div class="flex-grow-1 input-group input-group-merge">
+                                        <span class="input-group-text" id="basic-addon-search31"><i class="ti ti-search"></i></span>
+                                        <input
+                                            type="text"
+                                            class="form-control chat-search-input"
+                                            placeholder="Search..."
+                                            aria-label="Search..."
+                                            aria-describedby="basic-addon-search31" />
+                                    </div>
+                                </div>
+                                <i
+                                    class="ti ti-x ti-lg cursor-pointer position-absolute top-50 end-0 translate-middle d-lg-none d-block"
+                                    data-overlay
+                                    data-bs-toggle="sidebar"
+                                    data-target="#app-chat-contacts"></i>
+                            </div>
+                            <div class="sidebar-body">
+                                <ul class="list-unstyled chat-contact-list py-2 mb-0" id="chat-list">
+                                    <li class="chat-contact-list-item chat-contact-list-item-title mt-0">
+                                        <h5 class="text-primary mb-0">Chats History</h5>
+                                    </li>
+                                    <li class="chat-contact-list-item chat-list-item-0 d-none">
+                                        <h6 class="text-muted mb-0">No Chats History Found</h6>
+                                    </li>
+                                    <li class="chat-contact-list-item active mb-1">
+                                        <a class="d-flex align-items-center">
+                                            <div class="flex-shrink-0 avatar avatar-online">
+                                                <img src="<%= asset_url %>/assets/img/elements/1.jpg" alt="Avatar" class="rounded-circle" />
+                                            </div>
+                                            <div class="chat-contact-info flex-grow-1 ms-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6 class="chat-contact-name text-truncate m-0 fw-normal">CreatiBot</h6>
+                                                    <small class="text-muted">1 Minute</small>
+                                                </div>
+                                                <small class="chat-contact-status text-truncate">Creative Business Analyst</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        <!-- /Chat contacts -->
+
+                        <!-- Chat History -->
+                        <div class="col app-chat-history">
+                            <div class="chat-history-wrapper">
+                                <div class="chat-history-header border-bottom">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex overflow-hidden align-items-center">
+                                            <!-- <i
+                                                class="ti ti-menu-2 ti-lg cursor-pointer d-lg-none d-block me-4"
+                                                data-bs-toggle="sidebar"
+                                                data-overlay
+                                                data-target="#app-chat-contacts"></i> -->
+                                            <div class="flex-shrink-0 avatar avatar-online">
+                                                <img
+                                                    src="<%= asset_url %>/assets/img/elements/1.jpg"
+                                                    alt="Avatar"
+                                                    class="rounded-circle"
+                                                    data-bs-toggle="sidebar"
+                                                    data-overlay
+                                                    data-target="#app-chat-sidebar-right" />
+                                            </div>
+                                            <div class="chat-contact-info flex-grow-1 ms-4">
+                                                <h6 class="m-0 fw-normal">CreatiBot</h6>
+                                                <small class="user-status text-body">Creative Business Analyst</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-history-body">
+                                    <ul class="list-unstyled chat-history" id="chat"></ul>
+                                </div>
+                                <!-- Chat message form -->
+                                <div class="chat-history-footer shadow-xs">
+                                    <form class="form-send-message d-flex justify-content-between align-items-center">
+                                        <input
+                                            class="form-control message-input border-0 me-4 shadow-none"
+                                            placeholder="Apa yang ingin kamu tanyakan?" id="prompt">
+                                        <div class="message-actions d-flex align-items-center">
+                                            <button class="btn btn-primary d-flex send-msg-btn p-3">
+                                                <i class="ti ti-send ti-16px"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Chat History -->
+
+                        <!-- Sidebar Right -->
+                        <div class="col app-chat-sidebar-right app-sidebar overflow-hidden" id="app-chat-sidebar-right">
+                            <div
+                                class="sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-6 pt-12">
+                                <div class="avatar avatar-xl avatar-online chat-sidebar-avatar">
+                                    <img src="<%= asset_url %>/assets/img/elements/1.jpg" alt="Avatar" class="rounded-circle" />
+                                </div>
+                                <h5 class="mt-4 mb-0">CreatiBot</h5>
+                                <span>Creative Business Analyst</span>
+                                <i
+                                    class="ti ti-x ti-lg cursor-pointer close-sidebar d-block"
+                                    data-bs-toggle="sidebar"
+                                    data-overlay
+                                    data-target="#app-chat-sidebar-right"></i>
+                            </div>
+                            <div class="sidebar-body p-6 pt-0">
+                                <div class="my-6">
+                                    <p class="text-uppercase mb-1 text-muted">About</p>
+                                    <p class="mb-0">
+                                        Your personal creative agency assistant, helping you with your creative needs for your business.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Sidebar Right -->
+                    </div>
+            </div>
+        </div>
+
+        <script src="<%= asset_url %>/assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/popper/popper.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/js/bootstrap.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/node-waves/node-waves.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/hammer/hammer.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/i18n/i18n.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/js/menu.js"></script>
+
+        <!-- endbuild -->
+
+        <!-- Vendors JS -->
+        <script src="<%= asset_url %>/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/swiper/swiper.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/showdown/showdown.min.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+        <script src="<%= asset_url %>/assets/vendor/libs/jsonrepair/jsonrepair.js"></script>
+
+        <!-- Main JS -->
+        <script src="<%= asset_url %>/assets/js/main.js"></script>
+
+        <!-- Page JS -->
+        <script src="<%= asset_url %>/assets/js/app-chat.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                const { jsonrepair } = JSONRepair
+                
+                let latestChat = getState('history');
+                if (latestChat) {
+                    Swal.fire({
+                        title: 'Load Chat History?',
+                        text: 'Do you want to load chat history?',
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: 'No',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                            cancelButton: 'btn btn-danger ms-2'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // load chat history
+                            // console.log('Load chat history');
+                            let history = JSON.parse(latestChat);
+                            history.forEach((item) => {
+                                message('human', item.inquiry, item.time ?? null);
+                                message('assistant', item.answer, item.time ?? null);
+                            });
+                        } else {
+                            // remove chat history
+                            // console.log('Remove chat history');
+                            localStorage.removeItem('history');
+                            sendGreetings();
+                        }
+                    });
+                } else {
+                    sendGreetings();
+                }
+                
+                function sendGreetings() {
+                    setTimeout(() => {
+                        message('assistant', '**Hi, aku Creatibot**<br><br>Aku adalah asisten kreatif yang akan membantu Anda dengan kebutuhan kreatif Anda untuk bisnis Anda, creative agency kami memiliki banyak pengalaman di bidang creative seperti social media marketing, branding, dan lainnya.<br>Kami juga memiliki beberapa subdivisi salah satunya divisi digital yang mengerjakan layanan pembuatan Augmented reality, Virtual reality, extended reality, mixed reality, gamification, dan juga interactive media.<br><br>**Apa yang bisa saya bantu hari ini?**', null, false);
+                    }, 100);
+                }
+
+
+                var converter = new showdown.Converter();
+
+                const $div = (cls) => {
+                    return $('<div>').addClass(cls);
+                }
+
+                function message(from, text, time = null, isJson = true) {
+                    let $el;
+                    let type = 'markdown';
+                    time = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                    if (from == 'loader') {
+                        $el = $div('chat-message chat-loader');
+                        $el.html(`<div class="sk-wave sk-primary">
+                        <div class="sk-wave-rect"></div>
+                        <div class="sk-wave-rect"></div>
+                        <div class="sk-wave-rect"></div>
+                        <div class="sk-wave-rect"></div>
+                        <div class="sk-wave-rect"></div>
+                        </div>`);
+                        $('#chat').append($el);
+                        setTimeout(() => {
+                            $el[0].scrollIntoView();
+                        }, 0);
+                    } else {
+                        let json = null;
+                        let theContent = null;
+                        // console.log(from);
+                        if (from === 'assistant') {
+                            try {
+                                // Log the answer before parsing
+                                // console.log('Raw answer:', text);
+                            
+                                // Replace new line into <br>
+                                if (isJson) {
+                                    if (text) {
+                                        text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+                                        // console.log('before:', text);
+                                
+                                        // Repair JSON if text is not null
+                                        text = jsonrepair(text);
+                                        console.log('after:', text);
+                                
+                                        // Parse JSON from answer
+                                        json = JSON.parse(text);
+                                
+                                        // Get the answer and type, replace <br> into new line
+                                        if (typeof json.content === 'string') {
+                                            text = json.content.replace(/<br>/g, '\n');
+                                        }
+                                        theContent = json.content;
+                                        type = json.type;
+                                
+                                        // console.log('Parsed text:', text, 'Type:', type);
+                                    } else {
+                                        console.error('Text is null, skipping JSON repair and parsing.');
+                                    }
+                                }
+                            } catch (e) {
+                                console.error('Failed to parse JSON:', e);
+                                // console.error('Answer content:', text);
+                            }
+                        }
+
+                        if (from === 'human') {
+                            $el = $('<li class="chat-message chat-message-right mb-8">');
+                        } else {
+                            $el = $('<li class="chat-message chat-message-left mb-8">');
+                        }
+
+                        if (type === 'markdown') {
+                            if (from === 'human') {
+                                $content = `
+                                    <div class="d-flex overflow-hidden">
+                                        <div class="chat-message-wrapper flex-grow-1">
+                                            <div class="chat-message-text chat-from-${from}">
+                                                ${text}
+                                            </div>
+                                            <div class="text-end text-muted mt-1">
+                                                <i class="ti ti-checks ti-16px text-success me-1"></i>
+                                                <small>${time}</small>
+                                            </div>
+                                        </div>
+                                        <div class="user-avatar flex-shrink-0 ms-4">
+                                            <div class="avatar avatar-sm">
+                                                <img src="<%= asset_url %>/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            } else {
+                                text = converter.makeHtml(text);
+                                $content = `<div class="d-flex overflow-hidden">
+                                    <div class="user-avatar flex-shrink-0 me-4">
+                                        <div class="avatar avatar-sm">
+                                            <img src="<%= asset_url %>/assets/img/elements/1.jpg" alt="Avatar" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-wrapper flex-grow-1">
+                                        <div class="chat-message-text chat-from-${from}">
+                                            ${text}
+                                        </div>
+                                        <div class="text-muted mt-1">
+                                            <small>${time}</small>
+                                        </div>
+                                    </div>
+                                </div>`
+                            }
+                        } else if (type === 'carousel') {
+                            if (from === 'human') {
+                                // Carousel for human is not supported
+                            } else {
+                                $content = `<div class="d-flex overflow-hidden">
+                                    <div class="user-avatar flex-shrink-0 me-4">
+                                        <div class="avatar avatar-sm">
+                                            <img src="<%= asset_url %>/assets/img/elements/1.jpg" alt="Avatar" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-wrapper flex-grow-1">
+                                        <div class="chat-message-wrapper flex-grow-1">
+                                            <div class="container-horizontal-scroll mb-2">`;
+                                json.content.slice(0, 4).forEach((item) => {
+                                    let picture = item.picture;
+                                    if (!picture.includes('http')) {
+                                        picture = `<%= asset_url %>/${item.picture}`;
+                                    }
+                                    $content += 
+                                                `<div class="item">
+                                                    <div class="card p-2 me-2 border">
+                                                        <div class="rounded-2 text-center mb-4">
+                                                            <img class="img-fluid" src="${picture ?? '#'}" alt="${item.title ?? 'N/A'}" style="max-height: 200px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="card-body p-4 pt-2">
+                                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                                <span class="badge bg-label-primary">${item.type ?? 'N/A'}</span>
+                                                                <p class="d-flex align-items-center justify-content-center fw-medium gap-1 mb-0">
+                                                                    ${item.rating ?? 'N/A'} <span class="text-warning"><i class="ti ti-star-filled ti-lg me-1"></i></span>
+                                                                </p>
+                                                            </div>
+                                                            <a href="#" class="h5">${item.title ?? 'N/A'}</a>
+                                                            <p class="mt-1">${item.description ?? 'N/A'}</p>
+                                                            <div class="d-flex flex-column flex-md-row gap-4 text-nowrap flex-wrap flex-md-nowrap flex-lg-wrap flex-xxl-nowrap">
+                                                                <a class="w-100 btn btn-label-primary d-flex align-items-center waves-effect" href="${item.button.url ?? '#'}" target="_blank">
+                                                                    <span class="me-2">${item.button.label ?? 'N/A'}</span>
+                                                                    <i class="ti ti-chevron-right ti-xs scaleX-n1-rtl"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
+                                });
+                                        $content += `
+                                            </div>
+                                        </div>
+                                        <div class="text-muted mt-1">
+                                            <small>${time}</small>
+                                        </div>
+                                    </div>
+                                </div>`
+                            }
+                        }
+
+                        $el.html($content);
+                        $('#chat').append($el);
+                        setTimeout(() => {
+                            $el[0].scrollIntoView();
+                        }, 0);
+
+                    }
+
+                    setTimeout(() => {
+                        $('#app-chat').removeClass('pt-12');
+                        console.log('Remove padding top');
+                        setTimeout(() => {
+                            $('#app-chat').addClass('pt-12');
+                            console.log('Add padding top');
+                        }, 400);
+                    }, 100);
+                    
+                    return $el;
+                }
+
+                function stream(type, text) {
+                    const $selectors = $(`.chat-message-text.chat-from-${type}`);
+                    const $el = $selectors.last()[0] || message(type, text);
+                    $el.innerText = text || '';
+                    setTimeout(() => {
+                        $el.scrollIntoView();
+                    }, 0);
+                    return $el;
+                }
+
+                function unmessage(type) {
+                    try {
+                        if (type == 'loader') {
+                            $('.chat-loader').remove();
+                        } else if (type == 'latest') {
+                            $('#chat').children().last().remove();
+                        } else {
+                            // const $el = $(`.chat-message.chat-message-${type}`);
+                            const $el = $(`.chat-message.chat-message-${type}`).last();
+                            $el && $el.remove();
+                        }
+                    } catch (e) {
+                        console.error('Failed to remove message:', e);
+                    }
+                }
+
+                const isTouchDevice = () => 'ontouchstart' in window;
+
+                function focusInput() {
+                    if (!isTouchDevice()) {
+                        $('#prompt').focus();
+                    }
+                }
+
+                async function ask(question, handler) {
+                    message('human', question);
+                    $('#prompt').blur();
+                    const url = '/chat';
+                    const $el = message('loader');
+                    setTimeout(get, 100);
+                
+                    // Record the start time
+                    const startTime = Date.now();
+                
+                    async function get() {
+                        // get state 'history'
+                        let history = getState('history');
+                        if (history) {
+                            history = JSON.parse(history);
+                        } else {
+                            history = [];
+                        }
+                
+                        // add new question to history
+                        let q = {
+                            answer: '',
+                            inquiry: question,
+                            history: history
+                        }
+
+                        // console.log(q);
+                
+                        // Send the request with POST method and JSON body
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(q)
+                        });
+                
+                        message('assistant');
+                        let answer = '';
+                        try {
+                            const reader = response.body.getReader();
+                            unmessage('loader');
+                            while (true) {
+                                const { done, value } = await reader.read();
+                                if (done) {
+                                    break;
+                                }
+                                const text = new TextDecoder().decode(value, { stream: true });
+                                answer += text;
+                                stream('assistant', answer);
+                            }
+                        } catch (e) {
+                            message('panic', `Something is wrong: ${e.toString()}`);
+                        } finally {
+                            unmessage('loader');
+                            unmessage('left');
+                            handler && handler(answer);
+                            setTimeout(focusInput, 0);
+                
+                            // Record the end time
+                            const endTime = Date.now();
+                
+                            // Calculate the duration
+                            const duration = endTime - startTime;
+
+                            message('assistant', answer);
+                
+                            // Update the history with the new entry
+                            if (history && history.length > 0) {
+                                history.push({
+                                    inquiry: question,
+                                    answer: answer,
+                                    duration: duration,
+                                    time: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+                                });
+                            } else {
+                                history = [{
+                                    inquiry: question,
+                                    answer: answer,
+                                    duration: duration,
+                                    time: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+                                }];
+                            }
+                            
+                            // Store updated history to local storage
+                            storeState('history', JSON.stringify(history));
+                        }
+                    }
+                }
+
+                function storeState(stateName, stateValue) {
+                    localStorage.setItem(stateName, stateValue);
+                }
+
+                function getState(stateName) {
+                    return localStorage.getItem(stateName);
+                }
+
+                $('.form-send-message').on('submit', function (event) {
+                    event.preventDefault();
+                    const $el = $('.message-input');
+                    const question = $el.val().trim();
+                    if (question.length > 0) {
+                        ask(question);
+                        $el.val('');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
