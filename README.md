@@ -2,6 +2,15 @@
 
 CreatiBot is an LangChain LLM Chatbot using llama-3.1-8b-instant model, lorem ipsum dolor sit amet
 
+## Proposal
+
+```
+Proposal: https://s.id/D184v
+URL App: https://creativeprompt.faraaz.id/
+Video Intro: https://s.id/65Pmm
+Github Project : https://s.id/oR7e0
+```
+
 ## How To Install
 
 1. Install all the modules
