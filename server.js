@@ -6,8 +6,29 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { jsonrepair } from 'jsonrepair'
 import { readFileSync } from 'fs';
+import { URL } from 'url';
 
 dotenv.config();
+
+const appDebug = process.env.APP_DEBUG === 'true';
+const botPicture = process.env.BOT_PICTURE ?? '/assets/img/elements/1.jpg';
+const appUrl = process.env.APP_URL ?? '';
+
+// Check if BOT_PICTURE is a valid URL
+const finalBotPicture = isValidUrl(botPicture) ? botPicture : `${appUrl}${botPicture}`;
+
+const dataToEjs = { 
+    app_name: process.env.APP_NAME ?? 'Creative Prompt',
+    asset_url: process.env.ASSET_URL ?? '',
+    app_url: appUrl,
+    app_debug: appDebug ?? false,
+    app_env: process.env.APP_ENV ?? 'production',
+    bot_name: process.env.BOT_NAME ?? 'CreatiBot',
+    bot_picture: finalBotPicture,
+    bot_role: process.env.BOT_ROLE ?? 'Creative Business Analyst',
+    bot_description: process.env.BOT_DESCRIPTION ?? 'Your personal creative agency assistant, helping you with your creative needs for your business.',
+    bot_status: process.env.BOT_STATUS ?? 'online',
+};
 
 // Read the Firebase service account JSON file path from environment variable
 const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT;
@@ -44,6 +65,17 @@ const LLM_API_BASE_URL = process.env.LLM_API_BASE_URL || 'https://api.groq.com/o
 const LLM_API_KEY = process.env.LLM_API_KEY || process.env.OPENAI_API_KEY || 'gsk_yourgroqapikeyhere';
 const LLM_CHAT_MODEL = process.env.LLM_CHAT_MODEL;
 const LLM_STREAMING = process.env.LLM_STREAMING !== 'no';
+
+// Function to check if a string is a valid URL
+function isValidUrl(string) {
+    try {
+        new URL(string);
+        return true;
+    } catch (_) {
+        return false;
+    }
+}
+
 
 // Chat Function (asynchronous)
 const chat = async (messages, handler) => {
@@ -202,17 +234,11 @@ function getCollectionData(collection) {
 // Routes
 
 app.get('/', (req, res) => {
-    res.redirect('/chatroom');
+    res.render('landingpage', dataToEjs);
 });
 
 app.get('/chatroom', (req, res) => {
-    const data = { 
-        title: process.env.APP_NAME || 'My AI Agencies',
-        asset_url: process.env.ASSET_URL || '',
-        app_url: process.env.APP_URL || '',
-    };
-    // res.render('index', data);
-    res.render('welcome', data);
+    res.render('chatroom', dataToEjs);
 });
 
 app.post('/chat', async (req, res) => {

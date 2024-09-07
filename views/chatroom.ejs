@@ -13,12 +13,12 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-        <title>Home | <%= title %></title>
+        <title><%= bot_name %> | <%= app_name %></title>
 
         <meta name="description" content="" />
 
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="<%= asset_url %>/assets/img/favicon/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="<%= asset_url %>/favicon.ico" />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -97,7 +97,7 @@
                         <div class="col app-chat-sidebar-left app-sidebar overflow-hidden" id="app-chat-sidebar-left">
                             <div
                                 class="chat-sidebar-left-user sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-6 pt-12">
-                                <div class="avatar avatar-xl avatar-online chat-sidebar-avatar">
+                                <div class="avatar avatar-xl avatar-<%= bot_status %> chat-sidebar-avatar">
                                     <img src="<%= asset_url %>/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
                                 </div>
                                 <h5 class="mt-4 mb-0">Manusia Kadal</h5>
@@ -128,7 +128,7 @@
                             <div class="sidebar-header h-px-75 px-5 border-bottom d-flex align-items-center">
                                 <div class="d-flex align-items-center me-6 me-lg-0">
                                     <div
-                                        class="flex-shrink-0 avatar avatar-online me-4"
+                                        class="flex-shrink-0 avatar avatar-<%= bot_status %> me-4"
                                         data-bs-toggle="sidebar"
                                         data-overlay="app-overlay-ex"
                                         data-target="#app-chat-sidebar-left">
@@ -163,15 +163,15 @@
                                     </li>
                                     <li class="chat-contact-list-item active mb-1">
                                         <a class="d-flex align-items-center">
-                                            <div class="flex-shrink-0 avatar avatar-online">
-                                                <img src="<%= asset_url %>/assets/img/elements/1.jpg" alt="Avatar" class="rounded-circle" />
+                                            <div class="flex-shrink-0 avatar avatar-<%= bot_status %>">
+                                                <img src="<%= bot_picture %>" alt="Avatar" class="rounded-circle" />
                                             </div>
                                             <div class="chat-contact-info flex-grow-1 ms-4">
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h6 class="chat-contact-name text-truncate m-0 fw-normal">CreatiBot</h6>
+                                                    <h6 class="chat-contact-name text-truncate m-0 fw-normal"><%= bot_name %></h6>
                                                     <small class="text-muted">1 Minute</small>
                                                 </div>
-                                                <small class="chat-contact-status text-truncate">Creative Business Analyst</small>
+                                                <small class="chat-contact-status text-truncate"><%= bot_role %></small>
                                             </div>
                                         </a>
                                     </li>
@@ -191,9 +191,9 @@
                                                 data-bs-toggle="sidebar"
                                                 data-overlay
                                                 data-target="#app-chat-contacts"></i> -->
-                                            <div class="flex-shrink-0 avatar avatar-online">
+                                            <div class="flex-shrink-0 avatar avatar-<%= bot_status %>">
                                                 <img
-                                                    src="<%= asset_url %>/assets/img/elements/1.jpg"
+                                                    src="<%= bot_picture %>"
                                                     alt="Avatar"
                                                     class="rounded-circle"
                                                     data-bs-toggle="sidebar"
@@ -201,8 +201,8 @@
                                                     data-target="#app-chat-sidebar-right" />
                                             </div>
                                             <div class="chat-contact-info flex-grow-1 ms-4">
-                                                <h6 class="m-0 fw-normal">CreatiBot</h6>
-                                                <small class="user-status text-body">Creative Business Analyst</small>
+                                                <h6 class="m-0 fw-normal"><%= bot_name %></h6>
+                                                <small class="user-status text-body"><%= bot_role %></small>
                                             </div>
                                         </div>
                                     </div>
@@ -231,11 +231,11 @@
                         <div class="col app-chat-sidebar-right app-sidebar overflow-hidden" id="app-chat-sidebar-right">
                             <div
                                 class="sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-6 pt-12">
-                                <div class="avatar avatar-xl avatar-online chat-sidebar-avatar">
-                                    <img src="<%= asset_url %>/assets/img/elements/1.jpg" alt="Avatar" class="rounded-circle" />
+                                <div class="avatar avatar-xl avatar-<%= bot_status %> chat-sidebar-avatar mt-8">
+                                    <img src="<%= bot_picture %>" alt="Avatar" class="rounded-circle" />
                                 </div>
-                                <h5 class="mt-4 mb-0">CreatiBot</h5>
-                                <span>Creative Business Analyst</span>
+                                <h5 class="mt-4 mb-0"><%= bot_name %></h5>
+                                <span><%= bot_role %></span>
                                 <i
                                     class="ti ti-x ti-lg cursor-pointer close-sidebar d-block"
                                     data-bs-toggle="sidebar"
@@ -282,6 +282,12 @@
         <script src="<%= asset_url %>/assets/js/app-chat.js"></script>
 
         <script>
+            function console_log(value) {
+                <% if (app_debug === true) { %>
+                    console.log(value);
+                <% } %>
+            }
+
             $(document).ready(function () {
                 const { jsonrepair } = JSONRepair
                 
@@ -301,7 +307,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // load chat history
-                            // console.log('Load chat history');
+                            console_log('Load chat history');
                             let history = JSON.parse(latestChat);
                             history.forEach((item) => {
                                 message('human', item.inquiry, item.time ?? null);
@@ -309,7 +315,7 @@
                             });
                         } else {
                             // remove chat history
-                            // console.log('Remove chat history');
+                            console_log('Remove chat history');
                             localStorage.removeItem('history');
                             sendGreetings();
                         }
@@ -320,7 +326,7 @@
                 
                 function sendGreetings() {
                     setTimeout(() => {
-                        message('assistant', '**Hi, aku Creatibot**<br><br>Aku adalah asisten kreatif yang akan membantu Anda dengan kebutuhan kreatif Anda untuk bisnis Anda, creative agency kami memiliki banyak pengalaman di bidang creative seperti social media marketing, branding, dan lainnya.<br>Kami juga memiliki beberapa subdivisi salah satunya divisi digital yang mengerjakan layanan pembuatan Augmented reality, Virtual reality, extended reality, mixed reality, gamification, dan juga interactive media.<br><br>**Apa yang bisa saya bantu hari ini?**', null, false);
+                        message('assistant', '**Hi, I\'m Creatibot**<br><br>I am a creative assistant who will help you with your creative needs for your business, our creative agency has a lot of experience in creative fields such as social media marketing, branding, and others.<br><br>We also have several subdivisions, one of which is the digital division which works on services to create Augmented reality, Virtual reality, extended reality, mixed reality, gamification, and also interactive media.<br><br>**What can I help you with today?', null, false);
                     }, 100);
                 }
 
@@ -351,17 +357,17 @@
                     } else {
                         let json = null;
                         let theContent = null;
-                        // console.log(from);
+                        console_log(from);
                         if (from === 'assistant') {
                             try {
                                 // Log the answer before parsing
-                                // console.log('Raw answer:', text);
+                                console_log('Raw answer:', text);
                             
                                 // Replace new line into <br>
                                 if (isJson) {
                                     if (text) {
                                         text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
-                                        // console.log('before:', text);
+                                        console_log('before:', text);
                                 
                                         // Repair JSON if text is not null
                                         text = jsonrepair(text);
@@ -377,7 +383,7 @@
                                         theContent = json.content;
                                         type = json.type;
                                 
-                                        // console.log('Parsed text:', text, 'Type:', type);
+                                        console_log('Parsed text:', text, 'Type:', type);
                                     } else {
                                         console.error('Text is null, skipping JSON repair and parsing.');
                                     }
@@ -419,7 +425,7 @@
                                 $content = `<div class="d-flex overflow-hidden">
                                     <div class="user-avatar flex-shrink-0 me-4">
                                         <div class="avatar avatar-sm">
-                                            <img src="<%= asset_url %>/assets/img/elements/1.jpg" alt="Avatar" class="rounded-circle">
+                                            <img src="<%= bot_picture %>" alt="Avatar" class="rounded-circle">
                                         </div>
                                     </div>
                                     <div class="chat-message-wrapper flex-grow-1">
@@ -439,7 +445,7 @@
                                 $content = `<div class="d-flex overflow-hidden">
                                     <div class="user-avatar flex-shrink-0 me-4">
                                         <div class="avatar avatar-sm">
-                                            <img src="<%= asset_url %>/assets/img/elements/1.jpg" alt="Avatar" class="rounded-circle">
+                                            <img src="<%= bot_picture %>" alt="Avatar" class="rounded-circle">
                                         </div>
                                     </div>
                                     <div class="chat-message-wrapper flex-grow-1">
@@ -496,10 +502,10 @@
 
                     setTimeout(() => {
                         $('#app-chat').removeClass('pt-12');
-                        console.log('Remove padding top');
+                        console_log('Remove padding top');
                         setTimeout(() => {
                             $('#app-chat').addClass('pt-12');
-                            console.log('Add padding top');
+                            console_log('Add padding top');
                         }, 400);
                     }, 100);
                     
@@ -566,7 +572,7 @@
                             history: history
                         }
 
-                        // console.log(q);
+                        console_log(q);
                 
                         // Send the request with POST method and JSON body
                         const response = await fetch(url, {

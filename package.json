@@ -20,5 +20,8 @@
     "jsonrepair": "^3.8.0",
     "marked": "^14.1.0",
     "socketio": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-ejs": "^0.0.2"
   }
 }
