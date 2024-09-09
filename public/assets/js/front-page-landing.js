@@ -9,14 +9,14 @@
     animationImg = document.querySelectorAll('.hero-dashboard-img'),
     animationElements = document.querySelectorAll('.hero-elements-img'),
     swiperLogos = document.getElementById('swiper-clients-logos'),
-    swiperReviews = document.getElementById('swiper-reviews'),
-    ReviewsPreviousBtn = document.getElementById('reviews-previous-btn'),
-    ReviewsNextBtn = document.getElementById('reviews-next-btn'),
-    ReviewsSliderPrev = document.querySelector('.swiper-button-prev'),
-    ReviewsSliderNext = document.querySelector('.swiper-button-next'),
-    priceDurationToggler = document.querySelector('.price-duration-toggler'),
-    priceMonthlyList = [].slice.call(document.querySelectorAll('.price-monthly')),
-    priceYearlyList = [].slice.call(document.querySelectorAll('.price-yearly'));
+    swiperReviews = document.getElementById('swiper-reviews');
+    // ReviewsPreviousBtn = document.getElementById('reviews-previous-btn'),
+    // ReviewsNextBtn = document.getElementById('reviews-next-btn'),
+    // ReviewsSliderPrev = document.querySelector('.swiper-button-prev'),
+    // ReviewsSliderNext = document.querySelector('.swiper-button-next'),
+    // priceDurationToggler = document.querySelector('.price-duration-toggler'),
+    // priceMonthlyList = [].slice.call(document.querySelectorAll('.price-monthly')),
+    // priceYearlyList = [].slice.call(document.querySelectorAll('.price-yearly'));
 
   // Hero
   const mediaQueryXL = '1200';
@@ -85,12 +85,12 @@
   // Reviews slider next and previous
   // -----------------------------------
   // Add click event listener to next button
-  ReviewsNextBtn.addEventListener('click', function () {
-    ReviewsSliderNext.click();
-  });
-  ReviewsPreviousBtn.addEventListener('click', function () {
-    ReviewsSliderPrev.click();
-  });
+  // ReviewsNextBtn.addEventListener('click', function () {
+  //   ReviewsSliderNext.click();
+  // });
+  // ReviewsPreviousBtn.addEventListener('click', function () {
+  //   ReviewsSliderPrev.click();
+  // });
 
   // Review client logo
   // -----------------------------------
@@ -114,31 +114,31 @@
 
   // Pricing Plans
   // -----------------------------------
-  document.addEventListener('DOMContentLoaded', function (event) {
-    function togglePrice() {
-      if (priceDurationToggler.checked) {
-        // If checked
-        priceYearlyList.map(function (yearEl) {
-          yearEl.classList.remove('d-none');
-        });
-        priceMonthlyList.map(function (monthEl) {
-          monthEl.classList.add('d-none');
-        });
-      } else {
-        // If not checked
-        priceYearlyList.map(function (yearEl) {
-          yearEl.classList.add('d-none');
-        });
-        priceMonthlyList.map(function (monthEl) {
-          monthEl.classList.remove('d-none');
-        });
-      }
-    }
-    // togglePrice Event Listener
-    togglePrice();
+  // document.addEventListener('DOMContentLoaded', function (event) {
+  //   function togglePrice() {
+  //     if (priceDurationToggler.checked) {
+  //       // If checked
+  //       priceYearlyList.map(function (yearEl) {
+  //         yearEl.classList.remove('d-none');
+  //       });
+  //       priceMonthlyList.map(function (monthEl) {
+  //         monthEl.classList.add('d-none');
+  //       });
+  //     } else {
+  //       // If not checked
+  //       priceYearlyList.map(function (yearEl) {
+  //         yearEl.classList.add('d-none');
+  //       });
+  //       priceMonthlyList.map(function (monthEl) {
+  //         monthEl.classList.remove('d-none');
+  //       });
+  //     }
+  //   }
+  //   // togglePrice Event Listener
+  //   togglePrice();
 
-    priceDurationToggler.onchange = function () {
-      togglePrice();
-    };
-  });
+  //   priceDurationToggler.onchange = function () {
+  //     togglePrice();
+  //   };
+  // });
 })();

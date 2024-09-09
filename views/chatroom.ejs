@@ -205,6 +205,15 @@
                                                 <small class="user-status text-body"><%= bot_role %></small>
                                             </div>
                                         </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-icon btn-text-secondary text-secondary rounded-pill dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="true" id="chat-header-actions"><i class="ti ti-language ti-md"></i></button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="chat-header-actions">
+                                                <a class="dropdown-item" href="javascript:void(0);" onclick="changeLanguage('id')">Bahasa Indonesia</a>
+                                                <a class="dropdown-item" href="javascript:void(0);" onclick="changeLanguage('en')">English</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="chat-history-body">
@@ -215,7 +224,7 @@
                                     <form class="form-send-message d-flex justify-content-between align-items-center">
                                         <input
                                             class="form-control message-input border-0 me-4 shadow-none"
-                                            placeholder="Apa yang ingin kamu tanyakan?" id="prompt">
+                                            placeholder="Whats on your mind?" id="prompt">
                                         <div class="message-actions d-flex align-items-center">
                                             <button class="btn btn-primary d-flex send-msg-btn p-3">
                                                 <i class="ti ti-send ti-16px"></i>
@@ -326,7 +335,7 @@
                 
                 function sendGreetings() {
                     setTimeout(() => {
-                        message('assistant', '**Hi, I\'m Creatibot**<br><br>I am a creative assistant who will help you with your creative needs for your business, our creative agency has a lot of experience in creative fields such as social media marketing, branding, and others.<br><br>We also have several subdivisions, one of which is the digital division which works on services to create Augmented reality, Virtual reality, extended reality, mixed reality, gamification, and also interactive media.<br><br>**What can I help you with today?', null, false);
+                        message('assistant', '**Hi, I\'m Creatibot**<br><br>I am a creative assistant who will help you with your creative needs for your business, our creative agency has a lot of experience in creative fields such as social media marketing, branding, and others.<br><br>We also have several subdivisions, one of which is the digital division which works on services to create Augmented reality, Virtual reality, extended reality, mixed reality, gamification, and also interactive media.<br><br>**What can I help you with today?**', null, false);
                     }, 100);
                 }
 

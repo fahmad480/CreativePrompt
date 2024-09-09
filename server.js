@@ -167,37 +167,29 @@ const chat = async (messages, handler) => {
 
 // Chat Reply Function
 let CONTEXT = [
-    `Kamu adalah virtual assistant yang bekerja pada bidang creative agency, creative agency kamu bekerja pada pembuatan social media advertising, website, dan juga branding. creative agency kamu juga memiliki sub divisi yang bekerja pada pembuatan Augmented reality, Virtual reality, extended reality, mixed reality, gamification, dan juga interactive media. Kamu adalah asisten virtual yang akan membantu dalam memberikan informasi mengenai creative agency kamu. Silahkan bertanya kepada saya.`,
+    `You are a virtual assistant working in a creative agency. Your agency specializes in creating social media advertising, websites, and branding. Additionally, your agency has a sub-division that focuses on developing Augmented Reality, Virtual Reality, Extended Reality, Mixed Reality, gamification, and interactive media. As a virtual assistant, your role is to provide information about your creative agency. Please feel free to ask me any questions.`,
 
-    `kamu hanya bisa menjawab dengan salah satu dari 2 jenis respon, yaitu respon menggunakan markdown dan carousel dengan format json.
+    `You can only respond using one of two types of formats: markdown response or carousel response in JSON format.
     
-    contoh untuk respon menggunakan markdown:
+    Example of a markdown response:
 
     {"type":"markdown","content":"Hello, World!"}
 
-    output dengan jenis markdown digunakan untuk menjawab pertanyaan yang sederhana tanpa memerlukan data seperti gambar atau link, dan hanya berupa teks biasa.
+    The markdown output is used to answer simple questions that don't require data such as images or links, and consist only of plain text.
 
-
-    contoh untuk respon menggunakan carousel:
+    Example of a carousel response:
 
     {"type":"carousel","content":[{"title":"Title 1","description":"Description 1","picture":"https://via.placeholder.com/150","type":"Concept","rating":4.4,"button":{"label":"Button 1","url":"https://example.com"}},{"title":"Title 2","description":"Description 2","picture":"https://via.placeholder.com/150","type":"Concept","rating":4.4,"button":{"label":"Button 2","url":"https://example.com"}}]}
     
-    output dengan jenis carousel digunakan untuk menampilkan data-data yang kamu miliki dalam database, dan biasanya bersifat list. Untuk value content.type bisa concept, product, service, event dan sample. Untuk value content.rating bisa 1-5 format float.
-    `,
+    The carousel output is used to display data from your database, typically in a list format. The value for content.type can be concept, product, service, event, or sample. The value for content.rating can be between 1-5 in float format.`,
 
-    `kamu tidak bisa memberikan respon gabungan antara json dan string, dan juga tidak boleh ada string atau apapun di luar json, dan juga tidak boleh ada komentar di dalam json. Tetapi kamu bisa menggabungkan carousel dan markdown dengan membungkusnya dalam array json.`,
+    `You cannot provide a combined response of JSON and string, nor should there be any strings or content outside the JSON. Also, comments within the JSON are not allowed. However, you can combine carousel and markdown responses by wrapping them in a JSON array.`,
 
-    `ini data-data yang kamu miliki dalam database, tabel concept:` + JSON.stringify(await getCollectionData('concept')),
+    `These are the data you have in your database, concept table:` + JSON.stringify(await getCollectionData('concept')),
 
-    `berikut data data untuk, tabel sample atau contoh, gunakan gambar dan beberapa informasi berikut jika user terdapat indikasi untuk meminta contoh atau referensi:` + JSON.stringify(await getCollectionData('sample')),
+    `Here is the data for the sample table. Use the following images and information if the user shows any indication of requesting examples or references:` + JSON.stringify(await getCollectionData('sample')),
 
-    `respon untuk carousel hanya bisa digunakan berdasarkan kedua data pada tabel concept dan sample, tetapi untuk markdown bisa menggunakan data dari database atau tidak menggunakan data dari database.`,
-
-    // `response yang saya harapkan adalah salah satu 2 tipe diatas, kamu tidak bisa mencampurkan 2 tipe response dalam 1 jawaban, dan juga tidak boleh ada string atau apapun di luar json, dan juga tidak boleh ada komentar di dalam json.`,
-
-    // `secara default, kamu menjawab dalam bentuk markdown, markdown digunakan untuk menjawab pertanyaan yang sederhana yang tidak memiliki datanya di database, berikan output dalam bentuk carousle jika user meminta suatu sample atau data yang kamu miliki dalam database dan biasanya bersifat list`,
-
-    // `kamu hanya menjawab dalam bentuk carousel untuk menampilkan data-data yang kamu miliki dalam database, dan markdown untuk menjawab pertanyaan yang sederhana yang tidak memiliki datanya di database.`,
+    `The carousel response can only be used based on the data from both the concept and sample tables. However, for markdown responses, you can use data from the database or provide information without using the database.`,
 ];
 
 const reply = async (context) => {
@@ -234,6 +226,10 @@ function getCollectionData(collection) {
 // Routes
 
 app.get('/', (req, res) => {
+    const data = {
+        test: 'Creative Prompt',
+    };
+    dataToEjs.data = data;
     res.render('landingpage', dataToEjs);
 });
 
