@@ -196,9 +196,8 @@
               </div>
             </div>
             <div id="heroDashboardAnimation" class="hero-animation-img mt-6" style="border-radius: 22px !important;">
-                <!-- Video Player -->
-                <video class="w-100 rounded-video" poster="https://firebasestorage.googleapis.com/v0/b/myaiagencies.appspot.com/o/thumbnail.png?alt=media&token=e58fb312-d82a-45e5-bbbc-810117c259ad" id="plyr-video-player" playsinline controls>
-                    <source src="https://firebasestorage.googleapis.com/v0/b/myaiagencies.appspot.com/o/Creative%20Prompt.mp4?alt=media&token=846911ca-2194-4c21-a5a2-a82c56018b6d" type="video/mp4" />
+                <video class="w-100 rounded-video" poster="<%= data.thumbnail %>" id="plyr-video-player" playsinline controls>
+                    <source src="<%= data.video %>" type="video/mp4" />
                 </video>
             </div>
           </div>

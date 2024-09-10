@@ -227,7 +227,8 @@ function getCollectionData(collection) {
 
 app.get('/', (req, res) => {
     const data = {
-        test: 'Creative Prompt',
+        video: process.env.VIDEO_URL ?? '',
+        thumbnail: process.env.THUMBNAIL_URL ?? '',
     };
     dataToEjs.data = data;
     res.render('landingpage', dataToEjs);
